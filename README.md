@@ -5,7 +5,7 @@ A backend store for Key Performance Indicator (KPI) data.
 
 Node.JS + CouchDB.
 
-NPiggybanks have a somewhat peculiar protocol in that they are write-many read-once.  You can put as many blobs (coins, bills, gift cards, it doesn't care because it's document-centric) as you want into piggybank (within allocated storage of course), but the extraction of resources from piggybank (coins, etc) is a one-time destructive operation (what old-timers referred to as "smashing it on the floor").
+Piggybanks have a somewhat peculiar protocol in that they are write-many read-once.  You can put as many blobs (coins, bills, gift cards, it doesn't care because it's document-centric) as you want into piggybank (within allocated storage of course), but the extraction of resources from piggybank (coins, etc) is a one-time destructive operation (what old-timers referred to as "smashing it on the floor").
 
 Requirements
 ------------

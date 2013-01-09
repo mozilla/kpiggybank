@@ -15,12 +15,16 @@ var dbBackend = subEnv['DB_BACKEND'] = "couchdb";
 var dbName = subEnv['DB_NAME'] = "bid_kpi_test";
 var dbHost = subEnv['DB_HOST'] = "127.0.0.1";
 var dbPort = parseInt(subEnv['DB_PORT'] = "5984", 10);
+var dbUser = subEnv['DB_USER'] = "kpiggybank";
+var dbPass = subEnv['DB_PASS'] = "kpiggybank";
 
 var dbConfig = {
   db_backend: dbBackend,
   db_host: dbHost,
   db_port: dbPort,
-  db_name: dbName
+  db_name: dbName,
+  db_user: dbUser,
+  db_pass: dbPass
 };
 
 // Don't search for an open port; always keep the same port for testing.

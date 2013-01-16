@@ -16,7 +16,7 @@ Requirements
 Installation
 ------------
 
-- git clone: `https://github.com/jedp/kpiggybank`
+- git clone: `https://github.com/mozilla/kpiggybank`
 - `npm install`
 
 Testing
@@ -73,6 +73,40 @@ ensure that the db exists, creating it if it doesn't.
 Please note that the database named `bid_kpi_test` is **deleted** as part of the 
 test suite.
 
+Running on AWS
+--------------
+
+You can use in-tree awsbox scripts to deploy kpiggybank on Amazon's cloud infrastructure.
+
+Clone kpiggybank:
+
+    $ git clone https://github.com/mozilla/kpiggybank
+    
+Install node modules:
+    
+    $ npm install
+
+You'll need an AWS account "signed up" for EC2. To set up AWS credentials for the scripts to access, you might put something like this
+in your `.bashrc`:
+
+    # This is your Access Key ID from your AWS Security Credentials
+    export AWS_ID=<your id>
+    # This is your Secret Access Key from your AWS Security Credentials
+    export AWS_SECRET=<your secret>
+
+Make sure you have an ssh key in ~/.ssh/id_rsa.pub
+
+Now you can run the awsbox script, which will fire up an AWS instance and install couchdb. Choose a name for your VM:
+
+    $ node_modules/.bin/awsbox create -n myvm
+
+Once it's ready, push the kpiggybank code to the server (this will trigger awsbox to startup kpiggybank):
+
+    $ git push myvm HEAD:master
+
+Now `http://<aws-ip>` should point to your new kpiggybank.
+
+For more information about awsbox: https://github.com/mozilla/awsbox
 
 JS API
 ------

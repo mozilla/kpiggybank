@@ -13,11 +13,35 @@ Requirements
 - An accessible CouchDB server for persistence.
 - Node.JS (0.6.17 or greater)
 
+### Ubuntu
+
+    sudo aptitude install couchdb
+
+Edit `/etc/couchdb/local.ini` and remove or add admin accounts as needed.
+You should run on default port 5984.
+
+    [admins]
+    admin = admin
+
 Installation
 ------------
 
-- git clone: `https://github.com/jedp/kpiggybank`
+- git clone: `https://github.com/mozilla/kpiggybank`
 - `npm install`
+
+### Setup CouchDB
+
+You'll need a user **admin** with the password **admin**. If you've already set this up
+you can skip this.
+
+    curl -X PUT http://localhost:5984/_config/admins/admin -d '"admin"'
+
+And secondly, setup our data storage.
+
+    # Change host
+    curl -X PUT http://admin:admin@localhost:5984/_config/admins/kpiggybank -d '"kpiggybank"'
+    # Create the database
+    curl -X PUT http://admin:admin@localhost:5984/bid_kpi
 
 Testing
 -------
@@ -72,6 +96,14 @@ ensure that the db exists, creating it if it doesn't.
 
 Please note that the database named `bid_kpi_test` is **deleted** as part of the 
 test suite.
+
+
+BrowserID
+---------
+
+To point a Persona server at your instance, put this in `browserid/config/local.json`
+
+  "kpi_backend_db_url": "http://localhost:3000/wsapi/interaction_data",
 
 
 JS API
@@ -158,6 +190,11 @@ Retrieve a count of the number of records; returns a JSON encoded number.
 
 - url: `/wsapi/interaction_data/count`
 - method: GET
+
+CouchDB Dashboard
+-----------------
+
+You can look at your data [using the couchdb dashboard](http://localhost:5984/_utils/database.html?bid_kpi)
 
 License
 -------

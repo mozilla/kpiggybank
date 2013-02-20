@@ -16,7 +16,7 @@ Requirements
 Installation
 ------------
 
-- git clone: `https://github.com/jedp/kpiggybank`
+- git clone: `https://github.com/mozilla/kpiggybank`
 - `npm install`
 
 Testing
@@ -73,6 +73,15 @@ ensure that the db exists, creating it if it doesn't.
 Please note that the database named `bid_kpi_test` is **deleted** as part of the 
 test suite.
 
+Running on AWS
+--------------
+
+You can use in-tree awsbox scripts to deploy kpiggybank on Amazon's cloud infrastructure.
+
+This process is now just like the process of deploying browserid on AWS, see:
+https://github.com/mozilla/browserid/blob/dev/docs/AWS_DEPLOYMENT.md
+
+The one modification is that kpiggybank's deploy script ignores mail setup.
 
 JS API
 ------

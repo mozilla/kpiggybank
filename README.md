@@ -78,35 +78,10 @@ Running on AWS
 
 You can use in-tree awsbox scripts to deploy kpiggybank on Amazon's cloud infrastructure.
 
-Clone kpiggybank:
+This process is now just like the process of deploying browserid on AWS, see:
+https://github.com/mozilla/browserid/blob/dev/docs/AWS_DEPLOYMENT.md
 
-    $ git clone https://github.com/mozilla/kpiggybank
-    
-Install node modules:
-    
-    $ npm install
-
-You'll need an AWS account "signed up" for EC2. To set up AWS credentials for the scripts to access, you might put something like this
-in your `.bashrc`:
-
-    # This is your Access Key ID from your AWS Security Credentials
-    export AWS_ID=<your id>
-    # This is your Secret Access Key from your AWS Security Credentials
-    export AWS_SECRET=<your secret>
-
-Make sure you have an ssh key in ~/.ssh/id_rsa.pub
-
-Now you can run the awsbox script, which will fire up an AWS instance and install couchdb. Choose a name for your VM:
-
-    $ node_modules/.bin/awsbox create -n myvm
-
-Once it's ready, push the kpiggybank code to the server (this will trigger awsbox to startup kpiggybank):
-
-    $ git push myvm HEAD:master
-
-Now `http://<aws-ip>` should point to your new kpiggybank.
-
-For more information about awsbox: https://github.com/mozilla/awsbox
+The one modification is that kpiggybank's deploy script ignores mail setup.
 
 JS API
 ------

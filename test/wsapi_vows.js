@@ -98,6 +98,37 @@ var store = function (kpi_json, cb) {
   return cb(null);
 };
 
+var store_error = function (bad_kpi_json, cb) {
+  var post_data = bad_kpi_json;
+
+  var db_url = urlparse(POST_BLOB_URL);
+
+  var options = {
+        host: db_url.host,
+        path: db_url.path,
+        port: db_url.port,
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Length': post_data.length
+        }
+  };
+
+  var kpi_req = http.request(options);
+  
+  kpi_req.on('response', function(r) {
+    cb(null, r.statusCode);
+  });
+  
+  kpi_req.on('error', function (e) {
+    cb(e);
+  });
+
+  kpi_req.write(post_data);
+  kpi_req.end();
+};
+
+
 vows.describe("HTTP Server")
 
 .addBatch({
@@ -160,6 +191,35 @@ vows.describe("HTTP Server")
     }
   }
 })
+
+.addBatch({
+  "Posting incorrectly": {
+    
+    "without 'data' yields": {
+      topic: function() {
+        store_error("Just a string", this.callback);
+      },
+      
+      "the right error": function(err, code) {
+        assert(code === 400);
+      }
+    },
+    
+    "with malformed JSON yields": {
+      topic: function() {
+        var post_data = querystring.stringify({
+          'data' : 'bad,json,bad'
+        });
+        store_error(post_data, this.callback);
+      },
+
+      "the right error": function(err, code) {
+        assert(code === 400);
+      }
+    }
+  }
+})
+
 
 .addBatch({
   "Stop server": {

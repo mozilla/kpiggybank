@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# install couchdb
+sudo yum install -y couchdb
+
 # start up couch db to add users
 sudo service couchdb start
 

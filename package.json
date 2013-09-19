@@ -21,7 +21,7 @@
 
     "devDependencies": {
         "vows": "0.6.2",
-        "awsbox": "0.4.2"
+        "awsbox": "0.5.4"
     },
 
     "scripts": {

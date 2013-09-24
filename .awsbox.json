@@ -2,8 +2,5 @@
   "processes": [ "lib/server.js" ],
   "hooks": {
     "postcreate" : "scripts/aws_post_create.sh"
-  },
-  "packages": [
-    "--enablerepo=epel couchdb"
-  ]
+  }
 }
